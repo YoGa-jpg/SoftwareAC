@@ -1,0 +1,48 @@
+﻿<Window x:Class="AAS.View.SendAnswerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AAS.View"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Отправить ответ"
+        ResizeMode="NoResize"
+        Height="888"
+        Width="671">
+    <Grid>
+        <TextBox
+            Name="ThemeBox"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+            Margin="59,30,71,0"
+            Padding="10"
+            Background="#E1E1E1"
+            VerticalAlignment="Top"
+            AcceptsReturn="True"
+            TextWrapping="Wrap"
+            VerticalScrollBarVisibility="Auto"
+            FontSize="24"
+            materialDesign:HintAssist.Hint="Тема"
+            IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextFieldTextBoxEnabledComboBox}" Height="61"/>
+        <TextBox
+            Name="DescriptionBox"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+            Margin="59,131,71,0"
+            Background="#E1E1E1"
+            VerticalAlignment="Top"
+            AcceptsReturn="True"
+            TextWrapping="Wrap"
+            VerticalScrollBarVisibility="Auto"
+            FontSize="24"
+            materialDesign:HintAssist.Hint="Текст ответа"
+            IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextFieldTextBoxEnabledComboBox}" Height="586"/>
+        <Button
+            Height="Auto"
+            Style="{StaticResource MaterialDesignOutlinedButton}"
+            FontSize="24"
+            FontWeight="Light"
+            Content="Отправить"
+            Margin="208,750,207,37"
+            Click="SendAnswer_OnClick"/>
+    </Grid>
+</Window>

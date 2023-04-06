@@ -1,0 +1,183 @@
+﻿<Window x:Class="AAS.View.AdminMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AAS.View"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Главная админ"
+        ResizeMode="NoResize"
+        WindowState="Normal"
+        Height="1024"
+        Width="1440">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="142*"/>
+            <RowDefinition Height="711*"/>
+            <RowDefinition Height="142*"/>
+        </Grid.RowDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            Height="49"
+            Width="153"
+            Margin="54,42,1225,51"
+            Text="Фильтры"
+            FontSize="36"
+            FontWeight="Light"
+            />
+        <ComboBox
+            Grid.Row="0"
+            Name="ComputerBox"
+            Height="62"
+            Margin="620,42,634,38"
+            ItemsSource="{Binding Computer}"
+            Style="{StaticResource MaterialDesignFilledComboBox}"
+            IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
+            materialDesign:HintAssist.Hint="Компьютер"
+            BorderBrush="Transparent"
+            SelectionChanged="ComputerBox_OnSelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock
+                        Text="{Binding ComputerId}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox
+            Grid.Row="0"
+            Name="ProgramBox"
+            Height="62"
+            Margin="876,42,378,38"
+            ItemsSource="{Binding Program}"
+            Style="{StaticResource MaterialDesignFilledComboBox}"
+            IsEnabled="{Binding IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
+            materialDesign:HintAssist.Hint="Программа"
+            BorderBrush="Transparent"
+            SelectionChanged="ProgramBox_OnSelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock
+                        Text="{Binding ProgramName}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <DataGrid
+            Name="GlobalInfoGrid"
+            Grid.Row="1"
+            ItemsSource="{Binding Software}"
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            SelectionUnit="FullRow"
+            CellEditEnding="GlobalInfoGrid_OnCellEditEnding">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Computer}" Header="Номер компьютера" />
+                <DataGridTextColumn Binding="{Binding Program}" Header="Название программы" />
+                <DataGridTextColumn Binding="{Binding ProgramType}" Header="Тип программы" />
+                <DataGridTextColumn Binding="{Binding LicenseStart}" Header="Начало лицензии" />
+                <DataGridTextColumn Binding="{Binding LicenseEnd}" Header="Конец лицензии" />
+                <DataGridTextColumn Binding="{Binding Version}" Header="Версия" />
+                <DataGridTextColumn Binding="{Binding WorkerName}" Header="Имя работника" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button
+            Grid.Row="2"
+            Height="62"
+            Style="{StaticResource MaterialDesignOutlinedButton}"
+            FontSize="24"
+            FontWeight="Light"
+            Content="Жалобы"
+            Margin="55,40,1201,39"
+            Click="Reports_OnClick"/>
+        <Button
+            Grid.Row="2"
+            Height="62"
+            Style="{StaticResource MaterialDesignOutlinedButton}"
+            FontSize="24"
+            FontWeight="Light"
+            Content="Удалить"
+            Margin="943,40,311,39"
+            Click="Delete_OnClick"/>
+        <Button
+            Grid.Row="2"
+            Height="62"
+            Style="{StaticResource MaterialDesignOutlinedButton}"
+            FontSize="24"
+            FontWeight="Light"
+            Content="Добавить"
+            Margin="1197,40,57,39"
+            Click="AddRow_OnClick"/>
+        <Button
+            Grid.Row="2"
+            Height="62"
+            Style="{StaticResource MaterialDesignOutlinedButton}"
+            FontSize="24"
+            FontWeight="Light"
+            Content="Отчеты"
+            Margin="313,40,943,39"
+            Click="Records_OnClick"/>
+        <Button
+            Grid.Row="2"
+            Height="62"
+            Style="{StaticResource MaterialDesignOutlinedButton}"
+            FontSize="24"
+            FontWeight="Light"
+            Content="Редактировать"
+            Margin="667,40,567,39"
+            Click="Update_OnClick"/>
+        <Button
+            Height="Auto"
+            Style="{StaticResource MaterialDesignOutlinedButton}"
+            FontSize="20"
+            FontWeight="Light"
+            Content="Программы"
+            Padding="5 0"
+            Margin="1257,14,21,94"
+            Click="ProgramsEdit_OnClick"/>
+        <Button
+            Height="Auto"
+            Style="{StaticResource MaterialDesignOutlinedButton}"
+            FontSize="20"
+            FontWeight="Light"
+            Content="Работники"
+            Padding="5 0"
+            Margin="1257,54,21,54"
+            Click="WorkersEdit_OnClick"/>
+        <Button
+            Height="Auto"
+            Style="{StaticResource MaterialDesignOutlinedButton}"
+            FontSize="20"
+            FontWeight="Light"
+            Content="Компьютеры"
+            Padding="5 0"
+            Margin="1257,93,21,15"
+            Click="ComputersEdit_OnClick"/>
+        <Button
+            Height="Auto"
+            Style="{StaticResource MaterialDesignOutlinedButton}"
+            FontSize="20"
+            FontWeight="Light"
+            Content="Обновить"
+            Padding="5 0"
+            Margin="1080,14,198,94"
+            Click="Refresh_OnClick"/>
+        <Button
+            Height="Auto"
+            Style="{StaticResource MaterialDesignOutlinedButton}"
+            FontSize="20"
+            FontWeight="Light"
+            Content="Типы"
+            Padding="5 0"
+            Margin="1080,54,198,54"
+            Click="TypesEdit_OnClick"/>
+        <Button
+            Height="Auto"
+            Style="{StaticResource MaterialDesignOutlinedButton}"
+            FontSize="20"
+            FontWeight="Light"
+            Content="Должности"
+            Padding="5 0"
+            Margin="1080,93,198,15"
+            Click="PositionsEdit_OnClick"/>
+    </Grid>
+</Window>

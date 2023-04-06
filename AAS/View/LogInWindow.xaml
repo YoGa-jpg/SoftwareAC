@@ -1,0 +1,38 @@
+﻿<Window x:Class="AAS.View.LogInWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:AAS.View"
+        mc:Ignorable="d"
+        Title="Вход"
+        ResizeMode="NoResize"
+        Height="300"
+        Width="250">
+    <Grid>
+        <Button
+            Height="Auto"
+            Style="{StaticResource MaterialDesignOutlinedButton}"
+            FontSize="18"
+            FontWeight="Light"
+            Content="Войти"
+            Margin="45,202,51,20"
+            Click="LogIn_OnClick"/>
+        <TextBlock
+            Grid.Row="0"
+            Width="153"
+            Margin="45,0,46,221"
+            Text="Войти"
+            FontSize="30"
+            FontWeight="Light"
+            TextAlignment="Center"
+            />
+        <PasswordBox
+            Name="PasswordBox"
+            Margin="45,74,46,149"
+            materialDesign:HintAssist.Hint="Пароль"
+            Padding="5 10"
+            />
+    </Grid>
+</Window>

@@ -1,0 +1,118 @@
+﻿<Window x:Class="AAS.MainWindow"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AAS"
+        mc:Ignorable="d"
+        Title="Главная"
+        ResizeMode="NoResize"
+        WindowState="Normal"
+        Height="1024"
+        Width="1440">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="142*"/>
+            <RowDefinition Height="711*"/>
+            <RowDefinition Height="142*"/>
+        </Grid.RowDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            Height="49"
+            Margin="55,42,814,51"
+            Text="Установленное на компьютере ПО"
+            FontSize="36"
+            FontWeight="Light"
+            />
+        <DataGrid
+            Grid.Row="1"
+            Name="SoftGrid"
+            ItemsSource="{Binding Software}"
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Program}" Header="Название программы" />
+                <DataGridTextColumn Binding="{Binding ProgramType}" Header="Тип программы" />
+                <DataGridTextColumn Binding="{Binding LicenseStart}" Header="Начало лицензии" />
+                <DataGridTextColumn Binding="{Binding LicenseEnd}" Header="Конец лицензии" />
+                <DataGridTextColumn Binding="{Binding Version}" Header="Версия" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button
+            Grid.Row="2"
+            Height="62"
+            Style="{StaticResource MaterialDesignOutlinedButton}"
+            FontSize="24"
+            FontWeight="Light"
+            Content="Жалобы"
+            Margin="688,40,568,39"
+            Click="Reports_OnClick"/>
+        <Button
+            Grid.Row="2"
+            Height="62"
+            Style="{StaticResource MaterialDesignOutlinedButton}"
+            FontSize="24"
+            FontWeight="Light"
+            Content="Ответы"
+            Margin="943,40,311,39"
+            Click="GetAnswers_OnClick"/>
+        <Button
+            Grid.Row="2"
+            Height="62"
+            Style="{StaticResource MaterialDesignOutlinedButton}"
+            FontSize="24"
+            FontWeight="Light"
+            Content="Войти"
+            Margin="1197,40,57,39"
+            Click="LogIn_OnClick"/>
+        <TextBlock
+            Grid.Row="0"
+            Height="49"
+            Margin="1112,20,79,73"
+            Text="Компьютер №"
+            FontSize="36"
+            FontWeight="Light"
+            />
+        <TextBlock
+            Name="Computer_Box"
+            Grid.Row="0"
+            Height="49"
+            Margin="1360,20,25,73"
+            Text="1"
+            FontSize="36"
+            FontWeight="Light"
+            />
+        <TextBlock
+            Name="Fullname_Box"
+            Grid.Row="0"
+            Height="49"
+            Margin="688,74,57,19"
+            Text="Алиев Эмиль Мусаевич"
+            TextAlignment="Right"
+            FontSize="36"
+            FontWeight="Light"
+            />
+        <Button
+            Height="Auto"
+            Style="{StaticResource MaterialDesignOutlinedButton}"
+            FontSize="20"
+            FontWeight="Light"
+            Content="Обновить"
+            Padding="5 0"
+            Margin="1221,2,57,675"
+            Click="Refresh_OnClick" Grid.Row="1"/>
+        <Button
+            Height="Auto"
+            Style="{StaticResource MaterialDesignOutlinedButton}"
+            ToolTip="Справка"
+            materialDesign:ButtonAssist.CornerRadius="100"
+            FontSize="20"
+            FontWeight="Light"
+            Content="?"
+            Padding="5 0"
+            Margin="625,53,764,56"
+            Click="Help_OnClick"/>
+    </Grid>
+</Window>

@@ -1,0 +1,87 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AAS.View"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="AAS.View.GetRecordsWindow"
+        mc:Ignorable="d"
+        Title="Отчеты"
+        ResizeMode="NoResize"
+        Height="764"
+        Width="688">
+    <Grid>
+        <Button
+            Height="Auto"
+            Style="{StaticResource MaterialDesignOutlinedButton}"
+            FontSize="24"
+            FontWeight="Light"
+            Content="Получить отчет"
+            Margin="208,608,224,55"
+            Click="Report_OnClick"/>
+        <ComboBox
+            Grid.Row="0"
+            Name="TypeBox"
+            FontSize="22"
+            Margin="168,394,184,257"
+            Style="{StaticResource MaterialDesignFilledComboBox}"
+            IsEnabled="{Binding IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
+            materialDesign:HintAssist.Hint="Типо отчета"
+            BorderBrush="Transparent">
+            <ComboBoxItem
+                Tag="1"
+                Content="Работоспособность ПО" />
+            <ComboBoxItem
+                Tag="2"
+                Content="Статистики жалоб" />
+            <ComboBoxItem
+                Tag="3"
+                Content="Информация о ПО" />
+        </ComboBox>
+        <DatePicker
+            Name="FirstDate"
+            materialDesign:ColorZoneAssist.Background="#F0F0F0"
+            FontSize="24"
+            Language="ru"
+            Height="59"
+            Margin="160,321,368,355"/>
+        <TextBlock
+            Grid.Row="0"
+            Margin="271,58,262,617"
+            Text="Отчеты"
+            FontSize="42"
+            FontWeight="Light"
+            />
+        <TextBlock
+            Grid.Row="0"
+            Margin="135,261,149,419"
+            Text="Временной промежуток"
+            FontSize="36"
+            FontWeight="Light"
+            />
+        <TextBlock
+            Grid.Row="0"
+            Margin="91,320,545,365"
+            Text="от"
+            TextAlignment="Center"
+            FontSize="30"
+            FontWeight="Light"
+            />
+        <DatePicker
+            Name="SecondDate"
+            materialDesign:ColorZoneAssist.Background="#F0F0F0"
+            FontSize="24"
+            Language="ru"
+            Height="59"
+            Margin="404,321,124,355"/>
+        <TextBlock
+            Grid.Row="0"
+            Margin="342,321,296,368"
+            Text="до"
+            TextAlignment="Center"
+            FontSize="30"
+            FontWeight="Light"
+            />
+
+    </Grid>
+</Window>

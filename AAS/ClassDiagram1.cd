@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AAS_Web.Models.Answer">
+    <Position X="16.25" Y="8" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAgIABAA=</HashCode>
+      <FileName>Models\Answer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Report" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AAS_Web.Models.Computer">
+    <Position X="8.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAEAABAAAAEAgAAEAAAAAAAAAAEAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Models\Computer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Worker" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Reports" />
+      <Property Name="Softwares" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="AAS_Web.Models.Position">
+    <Position X="2" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACgAAAAAAAgIAAAAAA=</HashCode>
+      <FileName>Models\Position.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Workers" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="AAS_Web.Models.Program">
+    <Position X="10.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAEAAAAEAAAAAAAAAAAAABAoAQEAAAAAAAA=</HashCode>
+      <FileName>Models\Program.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Type" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Reports" />
+      <Property Name="Softwares" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="AAS_Web.Models.Report">
+    <Position X="12.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAQAMAAAgAAAQAAAAAAQAAAAAABAIQAAAAAIAAAA=</HashCode>
+      <FileName>Models\Report.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Computer" />
+      <Property Name="Program" />
+      <Property Name="Status" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Answers" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="AAS_Web.Models.Software">
+    <Position X="8" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAEAAQAAAQAAAAAAAAIAAAAAEAEAABAoAAEIAgAAAAA=</HashCode>
+      <FileName>Models\Software.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AAS_Web.Models.Status">
+    <Position X="19.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAIAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Status.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Reports" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="AAS_Web.Models.Type">
+    <Position X="13.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAAAAAAAABAgAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Type.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Programs" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="AAS_Web.Models.Worker">
+    <Position X="4.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAgAAAAAAAAAACAABAAAAAAIgAAAAA=</HashCode>
+      <FileName>Models\Worker.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Position" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Computers" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
