@@ -22,23 +22,215 @@ namespace AAS.View
     /// </summary>
     public partial class AdminMainWindow : Window
     {
-        List<Software> response = new List<Software>();
+        #region Software
+
+        private List<Software> software = new
+            List<Software>()
+            {
+                new Software()
+                {
+                    Computer = new Computer()
+                    {
+                        ComputerId = 3,
+                        Worker = new Worker()
+                        {
+                            Fullname = "Давидович Антон Александрович",
+                            WorkerId = 1
+                        }
+                    },
+                    ComputerId = 3,
+                    LicenseStart = DateTime.Parse("01.01.2023"),
+                    LicenseEnd = DateTime.Parse("01.06.2023"),
+                    Program = new Program()
+                    {
+                        ProgramId = 1,
+                        ProgramName = "Adobe Photoshop",
+                        Type = new AAS_Web.Models.Type()
+                        {
+                            TypeId = 1,
+                            TypeName = "Graphics"
+                        }
+                    },
+                    Version = "Enterprise",
+                    ProgramType = "Graphics"
+                },
+                new Software()
+                {
+                    Computer = new Computer()
+                    {
+                        ComputerId = 3,
+                        Worker = new Worker()
+                        {
+                            Fullname = "Давидович Антон Александрович",
+                            WorkerId = 1
+                        }
+                    },
+                    ComputerId = 3,
+                    LicenseStart = DateTime.Parse("01.01.2023"),
+                    LicenseEnd = DateTime.Parse("01.06.2023"),
+                    Program = new Program()
+                    {
+                        ProgramId = 2,
+                        ProgramName = "Visual Studio 2022",
+                        Type = new AAS_Web.Models.Type()
+                        {
+                            TypeId = 2,
+                            TypeName = "IDE"
+                        }
+                    },
+                    Version = "Community",
+                    ProgramType = "IDE"
+                },
+                new Software()
+                {
+                    Computer = new Computer()
+                    {
+                        ComputerId = 3,
+                        Worker = new Worker()
+                        {
+                            Fullname = "Давидович Антон Александрович",
+                            WorkerId = 1
+                        }
+                    },
+                    ComputerId = 3,
+                    LicenseStart = DateTime.Parse("01.01.2023"),
+                    LicenseEnd = DateTime.Parse("01.06.2099"),
+                    Program = new Program()
+                    {
+                        ProgramId = 3,
+                        ProgramName = "VS Code",
+                        Type = new AAS_Web.Models.Type()
+                        {
+                            TypeId = 3,
+                            TypeName = "Code Editor"
+                        }
+                    },
+                    Version = "Community",
+                    ProgramType = "IDE"
+                },
+                new Software()
+                {
+                    Computer = new Computer()
+                    {
+                        ComputerId = 3,
+                        Worker = new Worker()
+                        {
+                            Fullname = "Давидович Антон Александрович",
+                            WorkerId = 1
+                        }
+                    },
+                    ComputerId = 3,
+                    LicenseStart = DateTime.Parse("01.01.2023"),
+                    LicenseEnd = DateTime.Parse("01.06.2023"),
+                    Program = new Program()
+                    {
+                        ProgramId = 2,
+                        ProgramName = "Jetbrains Rider",
+                        Type = new AAS_Web.Models.Type()
+                        {
+                            TypeId = 2,
+                            TypeName = "IDE"
+                        }
+                    },
+                    Version = "Enterprise",
+                    ProgramType = "IDE"
+                }
+            };
+
+        #endregion
+
+        #region Computers
+
+        private List<Computer> computers = new
+            List<Computer>()
+            {
+                new Computer()
+                {
+                    ComputerId = 1
+                },
+                new Computer()
+                {
+                    ComputerId = 2
+                },
+                new Computer()
+                {
+                    ComputerId = 3
+                },
+                new Computer()
+                {
+                    ComputerId = 4
+                }
+            };
+
+        #endregion
+
+        #region Programs
+
+        private List<Program> programs = new
+            List<Program>()
+            {
+                new Program()
+                {
+                    ProgramId = 1,
+                    ProgramName = "Adobe Photoshop",
+                    Type = new AAS_Web.Models.Type()
+                    {
+                        TypeId = 1,
+                        TypeName = "Graphics"
+                    }
+                },
+                new Program()
+                {
+                    ProgramId = 2,
+                    ProgramName = "Visual Studio 2022",
+                    Type = new AAS_Web.Models.Type()
+                    {
+                        TypeId = 2,
+                        TypeName = "IDE"
+                    }
+                },
+                new Program()
+                {
+                    ProgramId = 3,
+                    ProgramName = "VS Code",
+                    Type = new AAS_Web.Models.Type()
+                    {
+                        TypeId = 3,
+                        TypeName = "Code Editor"
+                    }
+                },
+                new Program()
+                {
+                    ProgramId = 2,
+                    ProgramName = "Jetbrains Rider",
+                    Type = new AAS_Web.Models.Type()
+                    {
+                        TypeId = 2,
+                        TypeName = "IDE"
+                    }
+                },
+            };
+
+            #endregion
+
         ConfigInfo config = new ConfigInfo(true);
         public AdminMainWindow()
         {
             InitializeComponent();
 
-            var software =
-                RequestHelper.SendRequest($@"{config.uri}/Home/GetComputersInfo", "POST", "");
+            //var software =
+            //    RequestHelper.SendRequest($@"{config.uri}/Home/GetComputersInfo", "POST", "");
 
-            ComputerBox.ItemsSource = JsonConvert.DeserializeObject<List<Computer>>(
-                RequestHelper.SendRequest($@"{config.uri}/Home/GetComputers", "POST", "").ToString());
+            //ComputerBox.ItemsSource = JsonConvert.DeserializeObject<List<Computer>>(
+            //    RequestHelper.SendRequest($@"{config.uri}/Home/GetComputers", "POST", "").ToString());
 
-            ProgramBox.ItemsSource = JsonConvert.DeserializeObject<List<Program>>(
-                RequestHelper.SendRequest($@"{config.uri}/Home/GetPrograms", "POST", "").ToString());
+            //ProgramBox.ItemsSource = JsonConvert.DeserializeObject<List<Program>>(
+            //    RequestHelper.SendRequest($@"{config.uri}/Home/GetPrograms", "POST", "").ToString());
 
-            response = JsonConvert.DeserializeObject<List<Software>>(software.ToString());
-            GlobalInfoGrid.ItemsSource = response;
+            //response = JsonConvert.DeserializeObject<List<Software>>(software.ToString());
+            ComputerBox.ItemsSource = computers;
+            ProgramBox.ItemsSource = programs;
+            GlobalInfoGrid.ItemsSource = software;
         }
 
         private void Reports_OnClick(object sender, RoutedEventArgs e)
@@ -108,7 +300,7 @@ namespace AAS.View
             if (ComputerBox.SelectedItem != null)
             {
                 GlobalInfoGrid.ItemsSource = null;
-                GlobalInfoGrid.ItemsSource = response.Where(q =>
+                GlobalInfoGrid.ItemsSource = software.Where(q =>
                         q.ComputerId == (ComputerBox.SelectedItem as Computer).ComputerId);
 
                 ProgramBox.SelectedItem = null;
@@ -120,8 +312,8 @@ namespace AAS.View
             if (ProgramBox.SelectedItem != null)
             {
                 GlobalInfoGrid.ItemsSource = null;
-                GlobalInfoGrid.ItemsSource = response.Where(q =>
-                    q.ProgramId == (ProgramBox.SelectedItem as Program).ProgramId);
+                GlobalInfoGrid.ItemsSource = software.Where(q =>
+                    q.ProgramName == (ProgramBox.SelectedItem as Program).ProgramName);
 
                 ComputerBox.SelectedItem = null;
             }

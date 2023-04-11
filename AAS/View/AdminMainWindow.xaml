@@ -22,7 +22,7 @@
             Height="49"
             Width="153"
             Margin="54,42,1225,51"
-            Text="Фильтры"
+            Text="Filters"
             FontSize="36"
             FontWeight="Light"
             />
@@ -86,7 +86,7 @@
             Style="{StaticResource MaterialDesignOutlinedButton}"
             FontSize="24"
             FontWeight="Light"
-            Content="Жалобы"
+            Content="Complaints"
             Margin="55,40,1201,39"
             Click="Reports_OnClick"/>
         <Button
@@ -95,7 +95,7 @@
             Style="{StaticResource MaterialDesignOutlinedButton}"
             FontSize="24"
             FontWeight="Light"
-            Content="Удалить"
+            Content="Delete"
             Margin="943,40,311,39"
             Click="Delete_OnClick"/>
         <Button
@@ -104,7 +104,7 @@
             Style="{StaticResource MaterialDesignOutlinedButton}"
             FontSize="24"
             FontWeight="Light"
-            Content="Добавить"
+            Content="Add"
             Margin="1197,40,57,39"
             Click="AddRow_OnClick"/>
         <Button
@@ -113,7 +113,7 @@
             Style="{StaticResource MaterialDesignOutlinedButton}"
             FontSize="24"
             FontWeight="Light"
-            Content="Отчеты"
+            Content="Reports"
             Margin="313,40,943,39"
             Click="Records_OnClick"/>
         <Button
@@ -122,7 +122,7 @@
             Style="{StaticResource MaterialDesignOutlinedButton}"
             FontSize="24"
             FontWeight="Light"
-            Content="Редактировать"
+            Content="Update"
             Margin="667,40,567,39"
             Click="Update_OnClick"/>
         <Button

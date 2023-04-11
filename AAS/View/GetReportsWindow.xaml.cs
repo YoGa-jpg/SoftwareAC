@@ -11,6 +11,75 @@ namespace AAS.View
 {
     public partial class GetReportsWindow : Window
     {
+        #region Reports
+
+        private List<Report> reports = new List<Report>()
+        {
+            new Report()
+            {
+                ReportId = 1,
+                ComputerId = 3,
+                ProgramId = 3,
+                ReportDate = DateTime.Parse("09.04.2023"),
+                ReportTheme = "Не работает VS",
+                Status = new Status()
+                {
+                    Name = "Выполнено",
+                    StatusId = 1
+                }
+            },
+            new Report()
+            {
+                ReportId = 2,
+                ComputerId = 3,
+                ProgramId = 3,
+                ReportDate = DateTime.Parse("09.04.2023"),
+                ReportTheme = "Не работает VS",
+                Status = new Status()
+                {
+                    Name = "Не рассмотрено",
+                    StatusId = 3
+                }
+            },
+            new Report()
+            {
+                ReportId = 3,
+                ComputerId = 3,
+                ProgramId = 3,
+                ReportDate = DateTime.Parse("09.04.2023"),
+                ReportTheme = "Не работает VS",
+                Status = new Status()
+                {
+                    Name = "Не рассмотрено",
+                    StatusId = 3
+                }
+            }
+        };
+
+        #endregion
+
+        #region Statuses
+
+        private List<Status> statuses = new List<Status>()
+        {
+            new Status()
+            {
+                Name = "Выполнено",
+                StatusId = 1
+            },
+            new Status()
+            {
+                Name = "В процессе",
+                StatusId = 2
+            },
+            new Status()
+            {
+                Name = "Не рассмотрено",
+                StatusId = 3
+            }
+        };
+
+            #endregion
         List<Report> response = new List<Report>();
         ConfigInfo config = new ConfigInfo(true);
 
@@ -18,14 +87,16 @@ namespace AAS.View
         {
             InitializeComponent();
 
-            var software =
-                RequestHelper.SendRequest($@"{config.uri}/Home/GetReports", "POST", "");
+            //var software =
+            //    RequestHelper.SendRequest($@"{config.uri}/Home/GetReports", "POST", "");
 
-            response = JsonConvert.DeserializeObject<List<Report>>(software.ToString());
+            //response = JsonConvert.DeserializeObject<List<Report>>(software.ToString());
 
-            StatusBox.ItemsSource = JsonConvert.DeserializeObject<List<Status>>(RequestHelper.SendRequest($@"{config.uri}/Home/GetStatuses", "POST", "").ToString());
+            //StatusBox.ItemsSource = JsonConvert.DeserializeObject<List<Status>>(RequestHelper.SendRequest($@"{config.uri}/Home/GetStatuses", "POST", "").ToString());
 
-            ReportsGrid.ItemsSource = response;
+            //ReportsGrid.ItemsSource = response;
+            StatusBox.ItemsSource = statuses;
+            ReportsGrid.ItemsSource = reports;
         }
 
         private void SendAnswer_OnClick(object sender, RoutedEventArgs e)
@@ -108,7 +179,7 @@ namespace AAS.View
             {
                 ReportsGrid.ItemsSource = null;
                 ReportsGrid.ItemsSource =
-                    response.Where(q => q.StatusId == (StatusBox.SelectedItem as Status).StatusId);
+                    reports.Where(q => q.Status.Name == (StatusBox.SelectedItem as Status).Name);
             }
         }
     }

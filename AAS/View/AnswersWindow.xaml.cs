@@ -24,16 +24,48 @@ namespace AAS
     {
         public ConfigInfo config = new ConfigInfo(true); 
         public List<Answer> Response;
+
+        #region Data
+
+        private List<Answer> answers = new List<Answer>()
+        {
+            new Answer()
+            {
+                AnswerId = 1,
+                AnswerDescription = "Лицензия была продлена. Приносим извинения за неудобства.",
+                AnswerTheme = "Не работает VS",
+                Report = new Report()
+                {
+                    ReportId = 1,
+                    Computer = new
+                        Computer()
+                        {
+                            ComputerId = 3
+                        },
+                    ComputerId = 3,
+                    Program = new Program()
+                    {
+                        ProgramName = "Visual Studio 2022"
+                    },
+                    ProgramId = 2,
+                    ReportTheme = "Не работает VS",
+                    ReportDescription = "des"
+                },
+                ReportId = 1
+            }
+        };
+
+        #endregion
         public AnswersWindow()
         {
             InitializeComponent();
 
-            var answers = 
-                RequestHelper.SendRequest($@"{config.uri}/Home/GetAnswers", "POST", $"computerNumber={config.computer}");
+            //var answers = 
+            //    RequestHelper.SendRequest($@"{config.uri}/Home/GetAnswers", "POST", $"computerNumber={config.computer}");
 
-            Response = JsonConvert.DeserializeObject<List<Answer>>(answers.ToString());
+            //Response = JsonConvert.DeserializeObject<List<Answer>>(answers.ToString());
 
-            AnswersList.ItemsSource = Response;
+            AnswersList.ItemsSource = answers;
         }
 
         private void ShowAnswer_OnClick(object sender, RoutedEventArgs e)

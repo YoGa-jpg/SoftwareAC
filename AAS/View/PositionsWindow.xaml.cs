@@ -14,16 +14,43 @@ namespace AAS.View
     /// </summary>
     public partial class PositionsWindow : Window
     {
-        private List<Position> positions;
+        #region Positions
+
+        private List<Position> positions = new List<Position>()
+        {
+            new Position()
+            {
+                PositionId = 1,
+                PositionName = "Системный администратор",
+            },
+            new Position()
+            {
+                PositionId = 2,
+                PositionName = "Вахтерша"
+            },
+            new Position()
+            {
+                PositionId = 3,
+                PositionName = "Разработчик"
+            },
+            new Position()
+            {
+                PositionId = 4,
+                PositionName = "Сталелитейник"
+            }
+        };
+
+
+        #endregion
         ConfigInfo config = new ConfigInfo(true);
 
         public PositionsWindow()
         {
             InitializeComponent();
 
-            positions = JsonConvert.DeserializeObject<List<Position>>(
-                RequestHelper.SendRequest($@"{config.uri}/Home/GetPositions", "POST", "").ToString());
-
+            //positions = JsonConvert.DeserializeObject<List<Position>>(
+            //    RequestHelper.SendRequest($@"{config.uri}/Home/GetPositions", "POST", "").ToString());
+            
             GlobalInfoGrid.ItemsSource = positions;
         }
 
@@ -35,8 +62,8 @@ namespace AAS.View
                 if (AddPositionPermissionBox.Text == string.Empty)
                     permission = null;
 
-                RequestHelper.SendRequest($@"{config.uri}/Home/AddPosition", "POST",
-                    $"positionName={AddPositionNameBox.Text}&permission={permission}");
+                //RequestHelper.SendRequest($@"{config.uri}/Home/AddPosition", "POST",
+                //    $"positionName={AddPositionNameBox.Text}&permission={permission}");
 
                 MessageBox.Show("Тип программы добавлен успешно", "Редактирование типов", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }
@@ -56,8 +83,8 @@ namespace AAS.View
 
             if (GlobalInfoGrid.SelectedItem != null & EditPositionNameBox.Text != string.Empty)
             {
-                RequestHelper.SendRequest($@"{config.uri}/Home/UpdatePosition", "POST",
-                    $"positionId={(GlobalInfoGrid.SelectedItem as Position).PositionId}&positionName={EditPositionNameBox.Text}&permission={permission}");
+                //RequestHelper.SendRequest($@"{config.uri}/Home/UpdatePosition", "POST",
+                //    $"positionId={(GlobalInfoGrid.SelectedItem as Position).PositionId}&positionName={EditPositionNameBox.Text}&permission={permission}");
 
                 MessageBox.Show("Тип программы изменен успешно", "Редактирование типов", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }
@@ -73,8 +100,8 @@ namespace AAS.View
         {
             if (GlobalInfoGrid.SelectedItem != null)
             {
-                RequestHelper.SendRequest($@"{config.uri}/Home/DeletePosition", "POST",
-                    $"positionId={(GlobalInfoGrid.SelectedItem as Position).PositionId}");
+                //RequestHelper.SendRequest($@"{config.uri}/Home/DeletePosition", "POST",
+                //    $"positionId={(GlobalInfoGrid.SelectedItem as Position).PositionId}");
 
                 MessageBox.Show("Тип программы удален успешно", "Редактирование типов", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }
@@ -88,9 +115,9 @@ namespace AAS.View
 
         public void Resresh()
         {
-            GlobalInfoGrid.ItemsSource = null;
-            GlobalInfoGrid.ItemsSource = JsonConvert.DeserializeObject<List<Position>>(
-                RequestHelper.SendRequest($@"{config.uri}/Home/GetPositions", "POST", "").ToString());
+            //GlobalInfoGrid.ItemsSource = null;
+            //GlobalInfoGrid.ItemsSource = JsonConvert.DeserializeObject<List<Position>>(
+            //    RequestHelper.SendRequest($@"{config.uri}/Home/GetPositions", "POST", "").ToString());
         }
 
         private void GlobalInfoGrid_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -10,14 +10,33 @@ namespace AAS.View
 {
     public partial class TypesWindow : Window
     {
-        private List<Type> types;
+        #region Types
+
+        private List<Type> types = new List<Type>()
+        {
+            new Type()
+            {
+                TypeName = "Graphics"
+            },
+            new Type()
+            {
+                TypeName = "IDE"
+            },
+            new Type()
+            {
+                TypeName = "Code Editor"
+            }
+        };
+
+        #endregion
+
         ConfigInfo config = new ConfigInfo(true);
         public TypesWindow()
         {
             InitializeComponent();
 
-            types = JsonConvert.DeserializeObject<List<Type>>(
-                RequestHelper.SendRequest($@"{config.uri}/Home/GetTypes", "POST", "").ToString());
+            //types = JsonConvert.DeserializeObject<List<Type>>(
+            //    RequestHelper.SendRequest($@"{config.uri}/Home/GetTypes", "POST", "").ToString());
 
             GlobalInfoGrid.ItemsSource = types;
         }
@@ -26,8 +45,8 @@ namespace AAS.View
         {
             if (AddTypeNameBox.Text != string.Empty)
             {
-                RequestHelper.SendRequest($@"{config.uri}/Home/AddType", "POST",
-                    $"typeName={AddTypeNameBox.Text}");
+                //RequestHelper.SendRequest($@"{config.uri}/Home/AddType", "POST",
+                //    $"typeName={AddTypeNameBox.Text}");
 
                 MessageBox.Show("Тип программы добавлен успешно", "Редактирование типов", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }
@@ -43,8 +62,8 @@ namespace AAS.View
         {
             if (GlobalInfoGrid.SelectedItem != null & EditTypeNameBox.Text != string.Empty)
             {
-                RequestHelper.SendRequest($@"{config.uri}/Home/UpdateType", "POST",
-                    $"typeId={(GlobalInfoGrid.SelectedItem as Type).TypeId}&typeName={EditTypeNameBox.Text}");
+                //RequestHelper.SendRequest($@"{config.uri}/Home/UpdateType", "POST",
+                //    $"typeId={(GlobalInfoGrid.SelectedItem as Type).TypeId}&typeName={EditTypeNameBox.Text}");
 
                 MessageBox.Show("Тип программы изменен успешно", "Редактирование типов", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }
@@ -60,8 +79,8 @@ namespace AAS.View
         {
             if (GlobalInfoGrid.SelectedItem != null)
             {
-                RequestHelper.SendRequest($@"{config.uri}/Home/DeleteType", "POST",
-                    $"typeId={(GlobalInfoGrid.SelectedItem as Type).TypeId}");
+                //RequestHelper.SendRequest($@"{config.uri}/Home/DeleteType", "POST",
+                //    $"typeId={(GlobalInfoGrid.SelectedItem as Type).TypeId}");
 
                 MessageBox.Show("Тип программы удален успешно", "Редактирование типов", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }
@@ -75,9 +94,9 @@ namespace AAS.View
 
         public void Resresh()
         {
-            GlobalInfoGrid.ItemsSource = null;
-            GlobalInfoGrid.ItemsSource = JsonConvert.DeserializeObject<List<Type>>(
-                RequestHelper.SendRequest($@"{config.uri}/Home/GetTypes", "POST", "").ToString());
+            //GlobalInfoGrid.ItemsSource = null;
+            //GlobalInfoGrid.ItemsSource = JsonConvert.DeserializeObject<List<Type>>(
+            //    RequestHelper.SendRequest($@"{config.uri}/Home/GetTypes", "POST", "").ToString());
         }
 
         private void GlobalInfoGrid_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -23,9 +23,102 @@ namespace AAS.View
     /// </summary>
     public partial class ComputersWindow : Window
     {
-        private List<Worker> workersList;
+        #region Workers
 
-        public List<Computer> computers;
+        private List<Worker> workersList = new List<Worker>()
+        {
+            new Worker()
+            {
+                Fullname = "Иноземцев Герман Александрович",
+                Position = new Position()
+                {
+                    PositionName = "Системный администратор"
+                }
+            },
+            new Worker()
+            {
+                Fullname = "Алиев Эмиль Мусаевич",
+                Position = new Position()
+                {
+                    PositionName = "Вахтерша"
+                }
+            },
+            new Worker()
+            {
+                Fullname = "Давидович Антон Александрович",
+                Position = new Position()
+                {
+                    PositionName = "Разработчик"
+                }
+            },
+            new Worker()
+            {
+                Fullname = "Шабельянов Андрей Юрьевич",
+                Position = new Position()
+                {
+                    PositionName = "Сталелитейник"
+                }
+            }
+        };
+
+        #endregion
+
+        #region Computers
+
+        private List<Computer> computers = new
+            List<Computer>()
+            {
+                new Computer()
+                {
+                    ComputerId = 1,
+                    Worker = new Worker()
+                    {
+                        Fullname = "Иноземцев Герман Александрович",
+                        Position = new Position()
+                        {
+                            PositionName = "Системный администратор"
+                        }
+                    }
+                },
+                new Computer()
+                {
+                    ComputerId = 2,
+                    Worker = new Worker()
+                    {
+                        Fullname = "Алиев Эмиль Мусаевич",
+                        Position = new Position()
+                        {
+                            PositionName = "Вахтерша"
+                        }
+                    }
+                },
+                new Computer()
+                {
+                    ComputerId = 3,
+                    Worker = new Worker()
+                    {
+                        Fullname = "Давидович Антон Александрович",
+                        Position = new Position()
+                        {
+                            PositionName = "Разработчик"
+                        }
+                    }
+                },
+                new Computer()
+                {
+                    ComputerId = 4,
+                    Worker = new Worker()
+                    {
+                        Fullname = "Шабельянов Андрей Юрьевич",
+                        Position = new Position()
+                        {
+                            PositionName = "Сталелитейник"
+                        }
+                    }
+                }
+            };
+
+        #endregion
 
         ConfigInfo config = new ConfigInfo(true);
 
@@ -33,16 +126,16 @@ namespace AAS.View
         {
             InitializeComponent();
 
-            computers = JsonConvert.DeserializeObject<List<Computer>>(
-                RequestHelper.SendRequest($@"{config.uri}/Home/GetComputers", "POST", "").ToString());
+            //computers = JsonConvert.DeserializeObject<List<Computer>>(
+            //    RequestHelper.SendRequest($@"{config.uri}/Home/GetComputers", "POST", "").ToString());
+            //GlobalInfoGrid.ItemsSource = computers;
+
+            //workersList = JsonConvert.DeserializeObject<List<Worker>>(
+            //    RequestHelper.SendRequest($@"{config.uri}/Home/GetWorkers", "POST", "").ToString());
+
+            //computers = JsonConvert.DeserializeObject<List<Computer>>(
+            //    RequestHelper.SendRequest($@"{config.uri}/Home/GetComputers", "POST", "").ToString());
             GlobalInfoGrid.ItemsSource = computers;
-
-            workersList = JsonConvert.DeserializeObject<List<Worker>>(
-                RequestHelper.SendRequest($@"{config.uri}/Home/GetWorkers", "POST", "").ToString());
-
-            computers = JsonConvert.DeserializeObject<List<Computer>>(
-                RequestHelper.SendRequest($@"{config.uri}/Home/GetComputers", "POST", "").ToString());
-            
 
             AddComputerWorkerBox.ItemsSource = workersList;
 
@@ -53,8 +146,8 @@ namespace AAS.View
             var res = computers.Any(q => q.ComputerId == int.Parse(AddComputerIdBox.Text));
             if (new Regex(@"\d").IsMatch(AddComputerIdBox.Text) & AddComputerWorkerBox.SelectedItem != null & computers.All(q => q.ComputerId != int.Parse(AddComputerIdBox.Text)) & int.Parse(AddComputerIdBox.Text) > 0)
             {
-                RequestHelper.SendRequest($@"{config.uri}/Home/AddComputer", "POST",
-                    $"computerId={int.Parse(AddComputerIdBox.Text)}&workerId={(AddComputerWorkerBox.SelectedItem as Worker).WorkerId}");
+                //RequestHelper.SendRequest($@"{config.uri}/Home/AddComputer", "POST",
+                //    $"computerId={int.Parse(AddComputerIdBox.Text)}&workerId={(AddComputerWorkerBox.SelectedItem as Worker).WorkerId}");
 
                 MessageBox.Show("Компьютер добавлен успешно", "Редактирование компьютеров", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }
@@ -70,8 +163,8 @@ namespace AAS.View
         {
             if(new Regex(@"\d").IsMatch(AddComputerIdBox.Text) & (EditComputerWorkerBox.SelectedItem != null) & GlobalInfoGrid.SelectedItem != null & computers.All(q => q.ComputerId != int.Parse(EditComputerIdBox.Text)) & int.Parse(EditComputerIdBox.Text) > 0)
             {
-                RequestHelper.SendRequest($@"{config.uri}/Home/UpdateComputer", "POST",
-                    $"computerId={int.Parse(EditComputerIdBox.Text)}&workerId={(EditComputerWorkerBox.SelectedItem as Worker).WorkerId}");
+                //RequestHelper.SendRequest($@"{config.uri}/Home/UpdateComputer", "POST",
+                //    $"computerId={int.Parse(EditComputerIdBox.Text)}&workerId={(EditComputerWorkerBox.SelectedItem as Worker).WorkerId}");
 
                 MessageBox.Show("Компьютер изменен успешно", "Редактирование компьютеров", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }
@@ -87,8 +180,8 @@ namespace AAS.View
         {
             if(GlobalInfoGrid.SelectedItem != null)
             {
-                RequestHelper.SendRequest($@"{config.uri}/Home/DeleteComputer", "POST",
-                    $"computerId={(GlobalInfoGrid.SelectedItem as Computer).ComputerId}");
+                //RequestHelper.SendRequest($@"{config.uri}/Home/DeleteComputer", "POST",
+                //    $"computerId={(GlobalInfoGrid.SelectedItem as Computer).ComputerId}");
 
                 MessageBox.Show("Компьютер удален успешно", "Редактирование компьютеров", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }
@@ -102,10 +195,10 @@ namespace AAS.View
 
         public void Resresh()
         {
-            computers = JsonConvert.DeserializeObject<List<Computer>>(
-                RequestHelper.SendRequest($@"{config.uri}/Home/GetComputers", "POST", "").ToString());
-            GlobalInfoGrid.ItemsSource = null;
-            GlobalInfoGrid.ItemsSource = computers;
+            //computers = JsonConvert.DeserializeObject<List<Computer>>(
+            //    RequestHelper.SendRequest($@"{config.uri}/Home/GetComputers", "POST", "").ToString());
+            //GlobalInfoGrid.ItemsSource = null;
+            //GlobalInfoGrid.ItemsSource = computers;
         }
 
         private void GlobalInfoGrid_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -114,7 +207,7 @@ namespace AAS.View
             {
                 EditComputerIdBox.Text = (GlobalInfoGrid.SelectedItem as Computer).ComputerId.ToString();
                 EditComputerWorkerBox.SelectedItem =
-                    workersList.Single(q => q.WorkerId == (GlobalInfoGrid.SelectedItem as Computer).WorkerId);
+                    workersList.Single(q => q.Fullname == (GlobalInfoGrid.SelectedItem as Computer).Worker.Fullname);
             }
         }
     }

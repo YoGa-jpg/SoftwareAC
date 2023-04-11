@@ -2,19 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using AAS.Models;
 using AAS_Web.Models;
-using Newtonsoft.Json;
 using Xceed.Document.NET;
 using Xceed.Words.NET;
 using Formatting = Xceed.Document.NET.Formatting;
@@ -26,6 +17,287 @@ namespace AAS.View
     /// </summary>
     public partial class GetRecordsWindow : Window
     {
+        #region Reports
+
+        private List<Report> reports = new List<Report>()
+        {
+            new Report()
+            {
+                ReportId = 1,
+                ComputerId = 3,
+                ProgramId = 3,
+                ReportDate = DateTime.Parse("09.04.2023"),
+                ReportTheme = "Не работает VS",
+                Status = new Status()
+                {
+                    Name = "Выполнено",
+                    StatusId = 1
+                },
+                Program = new Program()
+                {
+                    ProgramName = "Visual Studio 2022"
+                }
+            },
+            new Report()
+            {
+                ReportId = 2,
+                ComputerId = 3,
+                ProgramId = 3,
+                ReportDate = DateTime.Parse("09.04.2023"),
+                ReportTheme = "Не запускается VS",
+                Status = new Status()
+                {
+                    Name = "Не рассмотрено",
+                    StatusId = 3
+                },
+                Program = new Program()
+                {
+                    ProgramName = "Visual Studio 2022"
+                }
+            },
+            new Report()
+            {
+                ReportId = 3,
+                ComputerId = 3,
+                ProgramId = 3,
+                ReportDate = DateTime.Parse("09.04.2023"),
+                ReportTheme = "Не закрывается VS",
+                Status = new Status()
+                {
+                    Name = "Не рассмотрено",
+                    StatusId = 3
+                },
+                Program = new Program()
+                {
+                    ProgramName = "Visual Studio 2022"
+                }
+            }
+        };
+
+        #endregion
+
+        #region Programs
+
+        private List<Program> programs = new
+            List<Program>()
+            {
+                new Program()
+                {
+                    ProgramId = 1,
+                    ProgramName = "Adobe Photoshop",
+                    Type = new AAS_Web.Models.Type()
+                    {
+                        TypeId = 1,
+                        TypeName = "Graphics"
+                    }
+                },
+                new Program()
+                {
+                    ProgramId = 2,
+                    ProgramName = "Visual Studio 2022",
+                    Type = new AAS_Web.Models.Type()
+                    {
+                        TypeId = 2,
+                        TypeName = "IDE"
+                    }
+                },
+                new Program()
+                {
+                    ProgramId = 3,
+                    ProgramName = "VS Code",
+                    Type = new AAS_Web.Models.Type()
+                    {
+                        TypeId = 3,
+                        TypeName = "Code Editor"
+                    }
+                },
+                new Program()
+                {
+                    ProgramId = 2,
+                    ProgramName = "Jetbrains Rider",
+                    Type = new AAS_Web.Models.Type()
+                    {
+                        TypeId = 2,
+                        TypeName = "IDE"
+                    }
+                },
+            };
+
+        #endregion
+
+        #region Computers
+
+        private List<Computer> computers = new
+            List<Computer>()
+            {
+                new Computer()
+                {
+                    ComputerId = 1,
+                    Worker = new Worker()
+                    {
+                        Fullname = "Иноземцев Герман Александрович",
+                        Position = new Position()
+                        {
+                            PositionName = "Системный администратор"
+                        }
+                    }
+                },
+                new Computer()
+                {
+                    ComputerId = 2,
+                    Worker = new Worker()
+                    {
+                        Fullname = "Алиев Эмиль Мусаевич",
+                        Position = new Position()
+                        {
+                            PositionName = "Вахтерша"
+                        }
+                    }
+                },
+                new Computer()
+                {
+                    ComputerId = 3,
+                    Worker = new Worker()
+                    {
+                        Fullname = "Давидович Антон Александрович",
+                        Position = new Position()
+                        {
+                            PositionName = "Разработчик"
+                        }
+                    }
+                },
+                new Computer()
+                {
+                    ComputerId = 4,
+                    Worker = new Worker()
+                    {
+                        Fullname = "Шабельянов Андрей Юрьевич",
+                        Position = new Position()
+                        {
+                            PositionName = "Сталелитейник"
+                        }
+                    }
+                }
+            };
+
+        #endregion
+
+        #region Softwares
+
+        private List<Software> software = new
+            List<Software>()
+            {
+                new Software()
+                {
+                    Computer = new Computer()
+                    {
+                        ComputerId = 3,
+                        Worker = new Worker()
+                        {
+                            Fullname = "Давидович Антон Александрович",
+                            WorkerId = 1
+                        }
+                    },
+                    ComputerId = 3,
+                    LicenseStart = DateTime.Parse("01.01.2023"),
+                    LicenseEnd = DateTime.Parse("01.06.2023"),
+                    Program = new Program()
+                    {
+                        ProgramId = 1,
+                        ProgramName = "Adobe Photoshop",
+                        Type = new AAS_Web.Models.Type()
+                        {
+                            TypeId = 1,
+                            TypeName = "Graphics"
+                        }
+                    },
+                    Version = "Enterprise",
+                    ProgramType = "Graphics"
+                },
+                new Software()
+                {
+                    Computer = new Computer()
+                    {
+                        ComputerId = 3,
+                        Worker = new Worker()
+                        {
+                            Fullname = "Давидович Антон Александрович",
+                            WorkerId = 1
+                        }
+                    },
+                    ComputerId = 3,
+                    LicenseStart = DateTime.Parse("01.01.2023"),
+                    LicenseEnd = DateTime.Parse("01.06.2023"),
+                    Program = new Program()
+                    {
+                        ProgramId = 2,
+                        ProgramName = "Visual Studio 2022",
+                        Type = new AAS_Web.Models.Type()
+                        {
+                            TypeId = 2,
+                            TypeName = "IDE"
+                        }
+                    },
+                    Version = "Community",
+                    ProgramType = "IDE"
+                },
+                new Software()
+                {
+                    Computer = new Computer()
+                    {
+                        ComputerId = 3,
+                        Worker = new Worker()
+                        {
+                            Fullname = "Давидович Антон Александрович",
+                            WorkerId = 1
+                        }
+                    },
+                    ComputerId = 3,
+                    LicenseStart = DateTime.Parse("01.01.2023"),
+                    LicenseEnd = DateTime.Parse("01.06.2099"),
+                    Program = new Program()
+                    {
+                        ProgramId = 3,
+                        ProgramName = "VS Code",
+                        Type = new AAS_Web.Models.Type()
+                        {
+                            TypeId = 3,
+                            TypeName = "Code Editor"
+                        }
+                    },
+                    Version = "Community",
+                    ProgramType = "IDE"
+                },
+                new Software()
+                {
+                    Computer = new Computer()
+                    {
+                        ComputerId = 3,
+                        Worker = new Worker()
+                        {
+                            Fullname = "Давидович Антон Александрович",
+                            WorkerId = 1
+                        }
+                    },
+                    ComputerId = 3,
+                    LicenseStart = DateTime.Parse("01.01.2023"),
+                    LicenseEnd = DateTime.Parse("01.06.2023"),
+                    Program = new Program()
+                    {
+                        ProgramId = 2,
+                        ProgramName = "Jetbrains Rider",
+                        Type = new AAS_Web.Models.Type()
+                        {
+                            TypeId = 2,
+                            TypeName = "IDE"
+                        }
+                    },
+                    Version = "Enterprise",
+                    ProgramType = "IDE"
+                }
+            };
+
+        #endregion
         ConfigInfo config = new ConfigInfo(true);
         public GetRecordsWindow()
         {
@@ -66,11 +338,14 @@ namespace AAS.View
         {
             var doc = DocX.Create($@"{config.path}ОтчетПО.docx");
 
-            var Programs = JsonConvert.DeserializeObject<List<Program>>(
-                RequestHelper.SendRequest($@"{config.uri}/Home/GetPrograms", "POST", "").ToString());
+            //var Programs = JsonConvert.DeserializeObject<List<Program>>(
+            //    RequestHelper.SendRequest($@"{config.uri}/Home/GetPrograms", "POST", "").ToString());
 
-            var Computers = JsonConvert.DeserializeObject<List<Computer>>(
-                RequestHelper.SendRequest($@"{config.uri}/Home/GetComputers", "POST", "").ToString());
+            //var Computers = JsonConvert.DeserializeObject<List<Computer>>(
+            //    RequestHelper.SendRequest($@"{config.uri}/Home/GetComputers", "POST", "").ToString());
+
+            var Programs = programs;
+            var Computers = computers;
 
             var titleFormat = new Formatting()
             {
@@ -148,14 +423,19 @@ namespace AAS.View
         {
             var doc = DocX.Create($@"{config.path}ОтчетЖалобы.docx");
 
-            var Reports = JsonConvert.DeserializeObject<List<Report>>(
-                RequestHelper.SendRequest($@"{config.uri}/Home/GetReports", "POST", "").ToString());
-            var ReportsAccepted = JsonConvert.DeserializeObject<List<Report>>(
-                RequestHelper.SendRequest($@"{config.uri}/Home/GetReportsAccepted", "POST", "").ToString());
-            var ReportsNotAccepted = JsonConvert.DeserializeObject<List<Report>>(
-                RequestHelper.SendRequest($@"{config.uri}/Home/GetReportsNotAccepted", "POST", "").ToString());
-            var ReportsDenied = JsonConvert.DeserializeObject<List<Report>>(
-                RequestHelper.SendRequest($@"{config.uri}/Home/GetReportsDenied", "POST", "").ToString());
+            //var Reports = JsonConvert.DeserializeObject<List<Report>>(
+            //    RequestHelper.SendRequest($@"{config.uri}/Home/GetReports", "POST", "").ToString());
+            //var ReportsAccepted = JsonConvert.DeserializeObject<List<Report>>(
+            //    RequestHelper.SendRequest($@"{config.uri}/Home/GetReportsAccepted", "POST", "").ToString());
+            //var ReportsNotAccepted = JsonConvert.DeserializeObject<List<Report>>(
+            //    RequestHelper.SendRequest($@"{config.uri}/Home/GetReportsNotAccepted", "POST", "").ToString());
+            //var ReportsDenied = JsonConvert.DeserializeObject<List<Report>>(
+            //    RequestHelper.SendRequest($@"{config.uri}/Home/GetReportsDenied", "POST", "").ToString());
+
+            var Reports = reports;
+            var ReportsAccepted = reports.Where(q => q.Status.StatusId == 1);
+            var ReportsNotAccepted = reports.Where(q => q.Status.StatusId == 2);
+            var ReportsDenied = reports.Where(q => q.Status.StatusId == 3);
 
             var titleFormat = new Formatting()
             {
@@ -199,7 +479,7 @@ namespace AAS.View
                 par3.SpacingAfter(10);
                 par3.InsertTableAfterSelf(table_1);
             var par4 = doc.InsertParagraph(
-                $"\tИсходя из данных представленных в таблице всего было подано {Reports.Count} жалоб из которых {ReportsAccepted.Count} отвечены, {ReportsNotAccepted.Count} еще не рассмотрены и {ReportsDenied.Count} отклонены. Наибольшее кол-во жалоб исходит с компьютера №{Reports.GroupBy(q => q.ComputerId).OrderBy(q => q.Count()).First().Key}", false, textFormat);
+                $"\tИсходя из данных представленных в таблице всего было подано {Reports.Count} жалоб из которых {ReportsAccepted.Count()} отвечены, {ReportsNotAccepted.Count()} еще не рассмотрены и {ReportsDenied.Count()} отклонены. Наибольшее кол-во жалоб исходит с компьютера №{Reports.GroupBy(q => q.ComputerId).OrderBy(q => q.Count()).First().Key}", false, textFormat);
                 par4.Alignment = Alignment.both;
             var par5 = doc.InsertParagraph($"Отчет за {DateTime.Now.ToShortDateString()}", false, textFormat);
                 par5.Alignment = Alignment.right;
@@ -214,12 +494,16 @@ namespace AAS.View
         {
             var doc = DocX.Create($@"{config.path}ОтчетРаботыПО.docx");
 
-            var Reports = JsonConvert.DeserializeObject<List<Report>>(
-                RequestHelper.SendRequest($@"{config.uri}/Home/GetReports", "POST", "").ToString());
-            var Programs = JsonConvert.DeserializeObject<List<Program>>(
-                RequestHelper.SendRequest($@"{config.uri}/Home/GetPrograms", "POST", "").ToString());
-            var Softwares = JsonConvert.DeserializeObject<List<Software>>(
-                RequestHelper.SendRequest($@"{config.uri}/Home/GetComputersInfo", "POST", "").ToString());
+            //var Reports = JsonConvert.DeserializeObject<List<Report>>(
+            //    RequestHelper.SendRequest($@"{config.uri}/Home/GetReports", "POST", "").ToString());
+            //var Programs = JsonConvert.DeserializeObject<List<Program>>(
+            //    RequestHelper.SendRequest($@"{config.uri}/Home/GetPrograms", "POST", "").ToString());
+            //var Softwares = JsonConvert.DeserializeObject<List<Software>>(
+            //    RequestHelper.SendRequest($@"{config.uri}/Home/GetComputersInfo", "POST", "").ToString());
+
+            var Reports = reports;
+            var Programs = programs;
+            var Softwares = software;
 
             var titleFormat = new Formatting()
             {
